@@ -1,0 +1,44 @@
+﻿@using MvcStok.Models.Entity;
+@model List<TBLURUNLER>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Ürünler Sayfası</h2>
+
+<div class="container mt-4">
+    <h2 class="mb-3">Ürün Listesi</h2>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>ÜRÜN ADI</th>
+                <th>MARKA</th>
+                <th>KATEGORİ</th>
+                <th>FİYAT</th>
+                <th>STOK</th>
+                <th>SİL</th>
+                <th>GÜNCELLE</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var urun in Model)
+            {
+                <tr>
+                    <th scope="row">@urun.URUNID</th>
+                    <td class="text-center bg-warning">@urun.URUNAD</td>
+                    <td class="text-center">@urun.MARKA</td>
+                    <td class="text-center bg-success">@urun.URUNKATEGORI</td>
+                    <td class="text-center">@urun.FIYAT</td>
+                    <td class="text-center bg-danger">@urun.STOK</td>
+                    <td><a href="/URUN/SIL/@urun.URUNID" class="btn btn-danger">SİL</a></td>
+                    <td class="d-flex justify-content-center"><a href="/URUN/GUNCELLE/@urun.URUNID" class="btn btn-info">GÜNCELLE</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<a href="/URUN/YENIURUN" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
