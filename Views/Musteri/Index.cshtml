@@ -15,16 +15,20 @@
                 <th>MÜŞTERİ ID</th>
                 <th>MÜŞTERİ ADI</th>
                 <th>MÜŞTERİ SOYADI</th>
+                <th>SİL</th>
+                <th>GÜNCELLE</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var musteri in Model)
             {
-                <tr>
-                    <th scope="row" class="bg-info">@musteri.MUSTERIID</th>
-                    <td class="text-center bg-warning">@musteri.MUSTERIAD</td>
-                    <td class="text-center bg-success">@musteri.MUSTERISOYAD</td>
-                </tr>
+            <tr>
+                <th scope="row" class="bg-info">@musteri.MUSTERIID</th>
+                <td class="text-center bg-warning">@musteri.MUSTERIAD</td>
+                <td class="text-center bg-success">@musteri.MUSTERISOYAD</td>
+                <td class="text-center"><a href="/MUSTERI/SIL/@musteri.MUSTERIID" class="btn btn-danger">SİL</a></td>
+                <td class="text-center"><a href="/MUSTERI/MusteriGetir/@musteri.MUSTERIID" class="btn btn-info">GUNCELLE</a></td>
+            </tr>
             }
         </tbody>
     </table>
