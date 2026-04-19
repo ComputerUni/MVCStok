@@ -88,3 +88,7 @@ C:\Users\BURHAN\Desktop\C#\MvcStok\bin\tr\System.Web.WebPages.Razor.resources.dl
 C:\Users\BURHAN\Desktop\C#\MvcStok\obj\Debug\MvcStok.csproj.Up2Date
 C:\Users\BURHAN\Desktop\C#\MvcStok\obj\Debug\MvcStok.dll
 C:\Users\BURHAN\Desktop\C#\MvcStok\obj\Debug\MvcStok.pdb
+C:\Users\BURHAN\Desktop\C#\MvcStok\bin\PagedList.dll
+C:\Users\BURHAN\Desktop\C#\MvcStok\bin\PagedList.Mvc.dll
+C:\Users\BURHAN\Desktop\C#\MvcStok\bin\PagedList.xml
+C:\Users\BURHAN\Desktop\C#\MvcStok\bin\PagedList.Mvc.xml

@@ -5,10 +5,16 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Müşteriler Sayfası</h2>
+@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{
+    <p>
+        <b>Aranacak Müşteri Adı:</b> @Html.TextBox("p")
+        <input type="submit" value="Ara" class="btn btn-info px-3" />
+    </p>
+}
 
 <div class="container mt-4">
-    <h2 class="mb-3">Ürün Listesi</h2>
+    <h2 class="mb-3">Müşteri Listesi</h2>
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
@@ -17,18 +23,20 @@
                 <th>MÜŞTERİ SOYADI</th>
                 <th>SİL</th>
                 <th>GÜNCELLE</th>
+                <th>ALERT</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var musteri in Model)
             {
-            <tr>
-                <th scope="row" class="bg-info">@musteri.MUSTERIID</th>
-                <td class="text-center bg-warning">@musteri.MUSTERIAD</td>
-                <td class="text-center bg-success">@musteri.MUSTERISOYAD</td>
-                <td class="text-center"><a href="/MUSTERI/SIL/@musteri.MUSTERIID" class="btn btn-danger">SİL</a></td>
-                <td class="text-center"><a href="/MUSTERI/MusteriGetir/@musteri.MUSTERIID" class="btn btn-info">GUNCELLE</a></td>
-            </tr>
+                <tr>
+                    <th scope="row" class="bg-info">@musteri.MUSTERIID</th>
+                    <td class="text-center bg-warning">@musteri.MUSTERIAD</td>
+                    <td class="text-center bg-success">@musteri.MUSTERISOYAD</td>
+                    <td class="text-center"><a href="/MUSTERI/SIL/@musteri.MUSTERIID" class="btn btn-danger">SİL</a></td>
+                    <td class="text-center"><a href="/MUSTERI/MusteriGetir/@musteri.MUSTERIID" class="btn btn-info">GUNCELLE</a></td>
+                    <td>@Html.ActionLink("SİL BUTONU", "SIL", new { id = musteri.MUSTERIID }, new { @class = "btn btn-warning", onclick = "return confirm('İşleminizi Gerçekleştirmek İstediğinizden Emin misiniz?')" })</td>
+                </tr>
             }
         </tbody>
     </table>

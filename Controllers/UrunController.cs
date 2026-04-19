@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcStok.Models.Entity;
+using PagedList;
 
 namespace MvcStok.Controllers
 {
@@ -11,9 +12,10 @@ namespace MvcStok.Controllers
     {
         // GET: Urun
         MVCDbStokEntities db = new MVCDbStokEntities();
-        public ActionResult Index()
+        public ActionResult Index(int sayfa = 1)
         {
-            var degerler = db.TBLURUNLER.ToList();
+            //var degerler = db.TBLURUNLER.ToList();
+            var degerler = db.TBLURUNLER.ToList().ToPagedList(sayfa, 8);
             return View(degerler);
         }
 
@@ -48,17 +50,21 @@ namespace MvcStok.Controllers
         public ActionResult UrunGetir(int id)
         {
             var urunGetir = db.TBLURUNLER.Find(id);
+            List<SelectListItem> degerler = (from i in db.TBLKATEGORILER.ToList() select new SelectListItem { Text = i.KATEGORIAD, Value = i.KATEGORIID.ToString() }).ToList();
+            ViewBag.deger = degerler;
             return View("UrunGetir", urunGetir);
         }
 
-        public ActionResult Guncelle(TBLURUNLER p1)
+        public ActionResult Guncelle(TBLURUNLER p)
         {
-            var urunGuncelle = db.TBLURUNLER.Find(p1.URUNID);
-            urunGuncelle.URUNAD = p1.URUNAD;
-            urunGuncelle.MARKA = p1.MARKA;
-            urunGuncelle.URUNKATEGORI = p1.URUNKATEGORI;
-            urunGuncelle.FIYAT = p1.FIYAT;
-            urunGuncelle.STOK = p1.STOK;
+            var urunGuncelle = db.TBLURUNLER.Find(p.URUNID);
+            urunGuncelle.URUNAD = p.URUNAD;
+            urunGuncelle.MARKA = p.MARKA;
+            //urunGuncelle.URUNKATEGORI = p.URUNKATEGORI;
+            var kategori = db.TBLKATEGORILER.Where(m => m.KATEGORIID == p.TBLKATEGORILER.KATEGORIID).FirstOrDefault();
+            urunGuncelle.URUNKATEGORI = kategori.KATEGORIID;
+            urunGuncelle.FIYAT = p.FIYAT;
+            urunGuncelle.STOK = p.STOK;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

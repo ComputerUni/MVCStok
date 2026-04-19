@@ -1,5 +1,7 @@
 ﻿@using MvcStok.Models.Entity;
-@model List<TBLURUNLER>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLURUNLER>
 
 
 @{
@@ -7,11 +9,9 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Ürünler Sayfası</h2>
-
 <div class="container mt-4">
     <h2 class="mb-3">Ürün Listesi</h2>
-    <table class="table table-bordered table-striped table-hover">
+    <table id="tbl1" class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
@@ -41,4 +41,14 @@
         </tbody>
     </table>
 </div>
+@*@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))*@
 <a href="/URUN/YENIURUN" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('#tbl1').DataTable();
+</script>
